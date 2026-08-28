@@ -1,0 +1,46 @@
+{
+	"name": "@tejasa97/pi-agentrouter-provider",
+	"version": "0.1.0",
+	"description": "Pi provider package for AgentRouter (OpenAI-compatible GLM-5.3).",
+	"type": "module",
+	"engines": {
+		"node": ">=22"
+	},
+	"scripts": {
+		"test": "node --test tests/*.test.mjs"
+	},
+	"keywords": [
+		"pi-package",
+		"pi-extension",
+		"pi-provider",
+		"pi-coding-agent",
+		"agentrouter",
+		"glm",
+		"llm",
+		"pi"
+	],
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/tejasa97/pi-agentrouter-provider.git"
+	},
+	"files": [
+		"extensions",
+		"package.json",
+		"README.md",
+		"LICENSE"
+	],
+	"pi": {
+		"extensions": [
+			"./extensions/agentrouter/index.ts"
+		]
+	},
+	"peerDependencies": {
+		"@earendil-works/pi-ai": "*",
+		"@earendil-works/pi-coding-agent": "*"
+	},
+	"devDependencies": {
+		"@earendil-works/pi-ai": "^0.84.0",
+		"@earendil-works/pi-coding-agent": "^0.84.0"
+	}
+}
