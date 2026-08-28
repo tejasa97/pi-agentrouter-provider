@@ -1,4 +1,5 @@
 import {
+	anthropicMessagesApi,
 	createProvider,
 	envApiKeyAuth,
 	openAICompletionsApi,
@@ -9,19 +10,25 @@ import {
 	PROVIDER_ID,
 	PROVIDER_NAME,
 	buildModels,
-	resolveBaseUrl,
+	resolveEndpoints,
+	type AgentRouterApi,
 } from "./models.ts";
 
-export function createAgentRouterProvider(env: NodeJS.ProcessEnv = process.env): Provider<"openai-completions"> {
-	const baseUrl = resolveBaseUrl(env);
+export function createAgentRouterProvider(
+	env: NodeJS.ProcessEnv = process.env,
+): Provider<AgentRouterApi> {
+	const endpoints = resolveEndpoints(env);
 	return createProvider({
 		id: PROVIDER_ID,
 		name: PROVIDER_NAME,
-		baseUrl,
+		baseUrl: endpoints.openaiBaseUrl,
 		auth: {
 			apiKey: envApiKeyAuth("AgentRouter API key", [ENV_API_KEY]),
 		},
-		models: buildModels(baseUrl),
-		api: openAICompletionsApi(),
+		models: buildModels(endpoints),
+		api: {
+			"openai-completions": openAICompletionsApi(),
+			"anthropic-messages": anthropicMessagesApi(),
+		},
 	});
 }

@@ -2,11 +2,9 @@
 
 Pi package that registers the `agentrouter` provider for [AgentRouter](https://agentrouter.org).
 
-v1 ships **GLM-5.3** on AgentRouter's OpenAI-compatible Chat Completions endpoint. Auth is an API key stored by `/login` in `~/.pi/agent/auth.json`, with `AGENTROUTER_API_KEY` as a fallback.
+The catalog is AgentRouter's documented coding models, plus `glm-5.3` (their Pi page still lists `glm-5.2`). Auth is an API key stored by `/login` in `~/.pi/agent/auth.json`, with `AGENTROUTER_API_KEY` as a fallback. One login covers both APIs.
 
-AgentRouter's public Pi docs still show `glm-5.2`. This package sends the model id `glm-5.3`. Confirm that id in [the personal console](https://agentrouter.org/console/personal) or [token page](https://agentrouter.org/console/token) if a request 404s.
-
-Do not mix this with AgentRouter's Anthropic Messages URL (`https://agentrouter.org`, no `/v1`). That path is for Claude Opus. Adding Opus later means a second model with `api: "anthropic-messages"` and `baseUrl: "https://agentrouter.org"`, still one `/login`.
+This is a static list from their docs, not a live `/v1/models` fetch. Confirm ids in [the personal console](https://agentrouter.org/console/personal) if a request 404s.
 
 ## Install
 
@@ -24,7 +22,7 @@ pi install /absolute/path/to/pi-agentrouter-provider
 
 1. Create an API key at https://agentrouter.org/console/token
 2. In Pi: `/login` → **Use an API key** → **AgentRouter**
-3. `/model` → `agentrouter/glm-5.3`
+3. `/model` → `agentrouter/glm-5.3` (or any other catalog id)
 
 The key is written to `~/.pi/agent/auth.json` under `agentrouter`. Stored credentials win over the environment.
 
@@ -35,21 +33,28 @@ export AGENTROUTER_API_KEY="your-key"
 pi
 ```
 
-Optional override if you need a different gateway:
+Optional endpoint overrides. Do not mix the two URLs.
 
 ```sh
 export AGENTROUTER_BASE_URL="https://agentrouter.org/v1"
+export AGENTROUTER_ANTHROPIC_BASE_URL="https://agentrouter.org"
 ```
 
-If Ctrl+P cycling ignores the new model, add `agentrouter/glm-5.3` to `enabledModels` in `~/.pi/agent/settings.json`. `/model` still lists it without that.
+If Ctrl+P cycling ignores a model, add `agentrouter/<id>` to `enabledModels` in `~/.pi/agent/settings.json`. `/model` still lists the full catalog without that.
 
 ## Models
 
 | Id | API | Base URL |
 | --- | --- | --- |
+| `claude-opus-4-6` | `anthropic-messages` | `https://agentrouter.org` |
+| `claude-opus-4-7` | `anthropic-messages` | `https://agentrouter.org` |
+| `claude-opus-4-8` | `anthropic-messages` | `https://agentrouter.org` |
+| `gpt-5.5` | `openai-completions` | `https://agentrouter.org/v1` |
+| `gpt-5.6` | `openai-completions` | `https://agentrouter.org/v1` |
+| `glm-5.2` | `openai-completions` | `https://agentrouter.org/v1` |
 | `glm-5.3` | `openai-completions` | `https://agentrouter.org/v1` |
 
-Thinking uses Pi's Z.AI GLM-5.3 flags (`thinkingFormat: "zai"`, `zaiToolStream: true`, `supportsDeveloperRole: false`). AgentRouter is a gateway. If a live request rejects `thinking` or `tool_stream`, those compat fields are the first thing to change.
+GLM thinking uses Pi's Z.AI flags. Opus uses adaptive thinking and omits `eager_input_streaming` because AgentRouter is a gateway. GPT uses Chat Completions, matching AgentRouter's Pi docs, not the Codex Responses path.
 
 ## Testing
 

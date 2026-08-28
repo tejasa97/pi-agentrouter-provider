@@ -6,7 +6,10 @@ export default function agentRouterProvider(pi: ExtensionAPI): void {
 }
 
 export {
+	CATALOG_MODEL_IDS,
+	DEFAULT_ANTHROPIC_BASE_URL,
 	DEFAULT_BASE_URL,
+	ENV_ANTHROPIC_BASE_URL,
 	ENV_API_KEY,
 	ENV_BASE_URL,
 	GLM_53_MODEL_ID,
@@ -14,6 +17,9 @@ export {
 	PROVIDER_NAME,
 	buildGlm53Model,
 	buildModels,
+	resolveAnthropicBaseUrl,
 	resolveBaseUrl,
+	resolveEndpoints,
+	resolveOpenAIBaseUrl,
 } from "./models.ts";
 export { createAgentRouterProvider } from "./provider.ts";

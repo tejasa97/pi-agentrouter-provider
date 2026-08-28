@@ -1,7 +1,7 @@
 {
 	"name": "@tejasa97/pi-agentrouter-provider",
-	"version": "0.1.0",
-	"description": "Pi provider package for AgentRouter (OpenAI-compatible GLM-5.3).",
+	"version": "0.2.0",
+	"description": "Pi provider package for AgentRouter (Opus, GPT-5.5/5.6, GLM-5.2/5.3).",
 	"type": "module",
 	"engines": {
 		"node": ">=22"
