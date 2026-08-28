@@ -1,5 +1,9 @@
-import { createProvider, envApiKeyAuth, type Provider } from "@earendil-works/pi-ai";
-import { openAICompletionsApi } from "@earendil-works/pi-ai/api/openai-completions.lazy";
+import {
+	createProvider,
+	envApiKeyAuth,
+	openAICompletionsApi,
+	type Provider,
+} from "@earendil-works/pi-ai/compat";
 import {
 	ENV_API_KEY,
 	PROVIDER_ID,
