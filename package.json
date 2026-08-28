@@ -20,6 +20,10 @@
 		"pi"
 	],
 	"license": "MIT",
+	"homepage": "https://github.com/tejasa97/pi-agentrouter-provider#readme",
+	"bugs": {
+		"url": "https://github.com/tejasa97/pi-agentrouter-provider/issues"
+	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/tejasa97/pi-agentrouter-provider.git"

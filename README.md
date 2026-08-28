@@ -9,13 +9,13 @@ This is a static list from their docs, not a live `/v1/models` fetch. Confirm id
 ## Install
 
 ```sh
-pi install git:github.com/tejasa97/pi-agentrouter-provider
+pi install npm:@tejasa97/pi-agentrouter-provider
 ```
 
-Or from a local clone:
+Or from git:
 
 ```sh
-pi install /absolute/path/to/pi-agentrouter-provider
+pi install git:github.com/tejasa97/pi-agentrouter-provider
 ```
 
 ## Usage
